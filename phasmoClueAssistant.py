@@ -14,8 +14,8 @@ Evidence =	{
 def EvidenceList( i, j, k):
 	return [ Evidence[i], Evidence[j], Evidence[k] ]
 
-sMenu=simpleMenu( 'Phasmophobia' )
-eliminationMenu=simpleMenu( 'To Elimninate' )
+sMenu = simpleMenu( 'Phasmophobia' )
+eliminationMenu = simpleMenu( 'To Elimninate' )
 
 possibleEvidence = []
 eliminated = []
@@ -119,15 +119,16 @@ def updateDescription():
 			sMenu.description += eliminatedGhostsTable.getTable()
 
 		titleForPossibleTable = 'Possible Ghosts'
+
 		if( len( possibleGhosts ) == 1 ):
 			titleForPossibleTable = 'Confirmed Ghost'
+		
 		sMenu.description += '\n' + newTable.getTableTitleFormat( titleForPossibleTable, allignmMent='left') + '\n'
 		sMenu.description += possibleGhostsTable.getTable()
 	else:
 		possibleEvidence.pop()
 		print('Last added evidence not possible')
 		pause()
-		updateDescription()
 
 def addToEvidence( i ):
 	if( len( possibleEvidence ) < 3):
@@ -169,11 +170,12 @@ def eliminateMenu():
 
 while (True):
 
+	
 	sMenu.reset( '' )
 	sMenu.change_backFunction( 'r', sMenu.Back, 'Reset' )
 	possibleEvidence = []
 	eliminated = []
-	updateDescription()
+	sMenu.defaultFunciton_SetTo(updateDescription)
 	for i in Evidence:
 		sMenu.menu_option_add(	addToEvidence,
 								Evidence[i],
