@@ -3,12 +3,12 @@ from ghost import Ghost
 from printableTable import printableTable
 
 Evidence =	{
-	1: "Emf",
-	2: "Fingerprint",
-	3: "Freezing Temp",
-	4: "GhostOrb",
-	5: "SpiritBox",
-	6: "Writing"
+	'E' : "Emf",
+	'F' : "Fingerprint",
+	'FT': "Freezing Temp",
+	'G' : "GhostOrb",
+	'S' : "SpiritBox",
+	'W' : "Writing"
 }
 
 def EvidenceList( i, j, k):
@@ -20,18 +20,18 @@ possibleEvidence = []
 eliminated = []
 ghostList = []
 
-Spirit = 		Ghost('Spirit', 		EvidenceList( 5, 2, 6), 'Smudge sticks longer')
-Wraith =		Ghost('Wraith', 		EvidenceList( 2, 3, 5), 'Toxic to Salt, floating, phasing')
-Phantom = 		Ghost('Phantom', 		EvidenceList( 1, 4, 3), 'Looking drops sanity, Photo disappearance')
-Poltergeist = 	Ghost('Poltergeist', 	EvidenceList( 5, 2, 4), 'Loves Throwing stuff')
-Banshee = 		Ghost('Banshee', 		EvidenceList( 1, 2, 3), 'One person at a time, fears Crucifix')
-Jinn = 			Ghost('Jinn', 			EvidenceList( 5, 4, 1), 'Fast,power must be off')
-Mare = 			Ghost('Mare', 			EvidenceList( 5, 4, 3), 'weak to light')
-Revenant = 		Ghost('Revenant', 		EvidenceList( 1, 2, 6), 'fast while haunting, slow while you hide')
-Shade = 		Ghost('Shade', 			EvidenceList( 1, 4, 6), 'shy with multiple ppl')
-Demon = 		Ghost('Demon', 			EvidenceList( 5, 6, 3), 'agressive, ouija wont drain sanity')
-Yurei = 		Ghost('Yurei', 			EvidenceList( 4, 6, 3), 'stronger sanity drain, smuding makes it stick')
-Oni = 			Ghost('Oni', 			EvidenceList( 1, 5, 6), 'Be more active')
+Spirit = 		Ghost('Spirit', 		EvidenceList( 'S', 'F', 'W') , description = 'Smudge sticks longer')
+Wraith =		Ghost('Wraith', 		EvidenceList( 'F', 'FT', 'S'), description = 'Toxic to Salt, floating, phasing')
+Phantom = 		Ghost('Phantom', 		EvidenceList( 'E', 'G', 'FT'), description = 'Looking drops sanity, Photo disappearance')
+Poltergeist = 	Ghost('Poltergeist', 	EvidenceList( 'S', 'F', 'G') , description = 'Loves Throwing stuff')
+Banshee = 		Ghost('Banshee', 		EvidenceList( 'E', 'F', 'FT'), description = 'One person at a time, fears Crucifix')
+Jinn = 			Ghost('Jinn', 			EvidenceList( 'S', 'G', 'E') , description = 'Fast,power must be off')
+Mare = 			Ghost('Mare', 			EvidenceList( 'S', 'G', 'FT'), description = 'weak to light')
+Revenant = 		Ghost('Revenant', 		EvidenceList( 'E', 'F', 'W') , description = 'fast while haunting, slow while you hide')
+Shade = 		Ghost('Shade', 			EvidenceList( 'E', 'G', 'W') , description = 'shy with multiple ppl')
+Demon = 		Ghost('Demon', 			EvidenceList( 'S', 'W', 'FT'), description = 'agressive, ouija wont drain sanity')
+Yurei = 		Ghost('Yurei', 			EvidenceList( 'G', 'W', 'FT'), description = 'stronger sanity drain, smuding makes it stick')
+Oni = 			Ghost('Oni', 			EvidenceList( 'E', 'S', 'W'), description = 'Be more active')
 
 ghostList = [ 	Spirit,
 				Wraith,
@@ -56,8 +56,8 @@ def updateDescription():
 	#if all of them are present the gost is added to possibleGhosts
 	for ghost in ghostList:
 		evidenceLen = 0
-		for k in possibleEvidence:
-			if ( ghost.evidence_present( k ) ):
+		for e in possibleEvidence:
+			if ( ghost.evidence_present( e ) ):
 				evidenceLen += 1
 		if ( evidenceLen == len( possibleEvidence ) ):
 			possibleGhosts.append( ghost )
@@ -66,7 +66,7 @@ def updateDescription():
 	for evidence in eliminated:
 		for ghost in possibleGhosts:		   
 			if ( ghost.evidence_present( evidence ) and ghost not in eliminatedGhosts ):
-												#for duplicates
+															#for duplicates
 				eliminatedGhosts.append( ghost )
 
 	eliminatedGhostsTable = printableTable()

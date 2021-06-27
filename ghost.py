@@ -1,8 +1,8 @@
 class Ghost:
-	def __init__(self, name, EvidenceList, desc):
+	def __init__(self, name, EvidenceList, description=""):
 		self.name = name
 		self.Evidence = EvidenceList
-		self.desc = desc	
+		self.desc = description	
 	def evidence_present(self, Evidence):
 		if Evidence in self.Evidence:
 			return True
