@@ -6,8 +6,8 @@ def clearScreen( ):
 	os.system('cls' if os.name == 'nt' else 'clear')
 
 #wait for user to press enter
-def pause( ):
-	input( 'Press enter to continue...' )
+def pause( text = 'Press enter to continue...'):
+	input( text )
 
 class simpleMenu( ):
 	#default back function that enables loop exit
@@ -17,7 +17,7 @@ class simpleMenu( ):
 	#deletes the first default option and sets the offset to 1
 	def delBackAndOffset( self ):
 		del self.menuOptions[ '0' ]
-		self.currentAutoIndex = 0
+		self.currentAutoIndex = 1
 
 	def reset( self, title ):
 		#sets default values
@@ -38,7 +38,7 @@ class simpleMenu( ):
 		#for breaking outside the loop
 		self.breaking = False
 
-		#for adding space inbetween the option
+		#for adding space in between the option
 		self.spacing = []
 
 		#for currect indexing when a str is added as a key
@@ -47,6 +47,12 @@ class simpleMenu( ):
 		#currently selected key
 		self.selection = ''
 	
+	def outside_loop_break(self):
+		self.run = False
+		self.breaking = True
+
+	def change_back_to_outside_loop_break(self, name = 'Back'):
+		self.menuOptions['0'] = [ self.outside_loop_break, name ]
 
 	def __init__( self, title, defaultFunction = False ):
 		#sets title calls reset to set values
@@ -87,7 +93,7 @@ class simpleMenu( ):
 	def menu_option_remove( self, key ):
 		del self.menuOptions[ key ]
 
-	def defaultFunciton_SetTo( self, func, args = False):
+	def defaultFunction_SetTo( self, func, args = False):
 		if( args ):
 			func_custom = functools.partial( func, args )
 		else:

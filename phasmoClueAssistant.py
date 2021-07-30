@@ -30,7 +30,7 @@ Mare = 			Ghost('Mare', 			EvidenceList( 'S', 'G', 'FT'), description = 'weak to
 Revenant = 		Ghost('Revenant', 		EvidenceList( 'E', 'F', 'W') , description = 'fast while haunting, slow while you hide')
 Shade = 		Ghost('Shade', 			EvidenceList( 'E', 'G', 'W') , description = 'shy with multiple ppl')
 Demon = 		Ghost('Demon', 			EvidenceList( 'S', 'W', 'FT'), description = 'agressive, ouija wont drain sanity')
-Yurei = 		Ghost('Yurei', 			EvidenceList( 'G', 'W', 'FT'), description = 'stronger sanity drain, smuding makes it stick')
+Yurei = 		Ghost('Yurei', 			EvidenceList( 'G', 'W', 'FT'), description = 'stronger sanity drain, smudging makes it stick')
 Oni = 			Ghost('Oni', 			EvidenceList( 'E', 'S', 'W'), description = 'Be more active')
 
 ghostList = [ 	Spirit,
@@ -53,7 +53,7 @@ def updateDescription():
 	neededList = []
 
 	#counts the number of possible evidence in each ghost evidence
-	#if all of them are present the gost is added to possibleGhosts
+	#if all of them are present the ghost is added to possibleGhosts
 	for ghost in ghostList:
 		evidenceLen = 0
 		for e in possibleEvidence:
@@ -87,18 +87,18 @@ def updateDescription():
 		
 		#adds evidence need to identify
 		for evidence in ghost.Evidence:
-			#edicence possible			  				#duplicates					 #evidence not eliminated
+			#evidence possible			  				#duplicates					 #evidence not eliminated
 			if ( evidence not in possibleEvidence and evidence not in neededList and evidence not in eliminated ):
 				neededList.append( evidence )
 	
 	if( len( possibleGhosts) > 0 ):
 
-		#if present print needed evidance table
+		#if present print needed evidence table
 		if( len( neededList ) > 0 ):
 			newTable = printableTable()
 			newTable.drawTitleSeperator = False
 			newTable.addRow( neededList )
-			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Needed Evidence', allignmMent = 'left' ) + '\n'
+			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Needed Evidence', alignment = 'left' ) + '\n'
 			sMenu.description += newTable.getTable()
 		
 		#if present print possible evidence
@@ -106,7 +106,7 @@ def updateDescription():
 			newTable = printableTable()
 			newTable.drawTitleSeperator = False
 			newTable.addRow( possibleEvidence )
-			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Current Evidence', allignmMent='left' ) + '\n'
+			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Current Evidence', alignment='left' ) + '\n'
 			sMenu.description += newTable.getTable()
 		
 		#if present print current eliminated evidence table 
@@ -114,12 +114,12 @@ def updateDescription():
 			newTable = printableTable()
 			newTable.drawTitleSeperator = False
 			newTable.addRow( eliminated )
-			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Eliminated Evidence', allignmMent = 'left') +'\n'
+			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Eliminated Evidence', alignment = 'left') +'\n'
 			sMenu.description += newTable.getTable()
 		
 		#if present print current eliminated ghosts table 
 		if ( len( eliminatedGhosts ) > 0 ):
-			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Eliminated Ghosts', allignmMent='left') + '\n'
+			sMenu.description += '\n' + newTable.getTableTitleFormat( 'Eliminated Ghosts', alignment='left') + '\n'
 			sMenu.description += eliminatedGhostsTable.getTable()
 
 		#print possible ghosts table
@@ -127,7 +127,7 @@ def updateDescription():
 		#if there is only one change the title from possible to confirmed
 		if( len( possibleGhosts ) == 1 ):
 			titleForPossibleTable = 'Confirmed Ghost'
-		sMenu.description += '\n' + newTable.getTableTitleFormat( titleForPossibleTable, allignmMent='left') + '\n'
+		sMenu.description += '\n' + newTable.getTableTitleFormat( titleForPossibleTable, alignment='left') + '\n'
 		sMenu.description += possibleGhostsTable.getTable()
 
 	#no ghosts possible remove last evidence
@@ -136,7 +136,7 @@ def updateDescription():
 		print('Last added evidence not possible')
 		pause()
 
-#add item to evidance table if it's not a duplicate and if present in eliminated list remove it
+#add item to evidence table if it's not a duplicate and if present in eliminated list remove it
 def addToEvidence( i ):
 	if( len( possibleEvidence ) < 3):
 		print()
@@ -153,11 +153,11 @@ def exiting():
 	sMenu.run = False
 	sMenu.breaking = True
 
-#menu for eliminating evidance
+#menu for eliminating evidence
 def eliminateMenu():
-	eliminationMenu = simpleMenu( 'To Elimninate' )
+	eliminationMenu = simpleMenu( 'To Eliminate' )
 
-	#add evidance to elimination menu
+	#add evidence to elimination menu
 	def addToElimination( toEliminate ):
 		if ( toEliminate not in possibleEvidence ):
 			eliminated.append( toEliminate )
@@ -185,7 +185,7 @@ while (True):
 	sMenu.change_backFunction( 'r', sMenu.Back, 'Reset' )
 	possibleEvidence = []
 	eliminated = []
-	sMenu.defaultFunciton_SetTo(updateDescription)
+	sMenu.defaultFunction_SetTo(updateDescription)
 	for i in Evidence:
 		sMenu.menu_option_add(	addToEvidence,
 								Evidence[i],
